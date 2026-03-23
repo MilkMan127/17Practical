@@ -101,3 +101,32 @@ public boolean isBST(tNode node, int min, int max) {
 
         return Math.sqrt(sum / arr.length);
     }
+     public static void main(String[] args) {
+
+        int runs = 30;
+        double[] populateTimes = new double[runs];
+        double[] deleteTimes = new double[runs];
+
+        int n = 15; // adjust this to get >1000ms
+        int max = (int)Math.pow(2, n) - 1;
+
+        for (int i = 0; i < runs; i++) {
+
+            tryBST tree = new tryBST();
+
+            long start = System.nanoTime();
+            tree.buildBalanced(1, max);
+            long end = System.nanoTime();
+            populateTimes[i] = (end - start) / 1_000_000.0;
+
+    
+            if (!tree.isBST()) {
+                System.out.println("Tree is NOT a BST!");
+                return;
+            }
+
+            start = System.nanoTime();
+            tree.removeEvens(tree.root);
+            end = System.nanoTime();
+            deleteTimes[i] = (end - start) / 1_000_000.0;
+        }
