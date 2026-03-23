@@ -67,7 +67,7 @@ public boolean isBST(tNode node, int min, int max) {
         else if (key > root.key)
             root.right = delete(root.right, key);
         else {
-            // node found
+            
             if (root.left == null) return root.right;
             else if (root.right == null) return root.left;
 
@@ -76,4 +76,28 @@ public boolean isBST(tNode node, int min, int max) {
         }
 
         return root;
+    }
+      public void removeEvens(tNode node) {
+        if (node == null) return;
+
+        removeEvens(node.left);
+        removeEvens(node.right);
+
+        if (node.key % 2 == 0) {
+            root = delete(root, node.key);
+        }
+    }
+
+    public static double average(double[] arr) {
+        double sum = 0;
+        for (double v : arr) sum += v;
+        return sum / arr.length;
+    }
+
+    public static double stdDev(double[] arr, double mean) {
+        double sum = 0;
+        for (double v : arr)
+            sum += Math.pow(v - mean, 2);
+
+        return Math.sqrt(sum / arr.length);
     }
