@@ -24,4 +24,19 @@ public class tryBST {
 
         return root;
     }
+ public void insert(int key) {
+        root = insert(root, key);
+    }
+
+    // BUILD BALANCED TREE
+    public void buildBalanced(int start, int end) {
+        if (start > end) return;
+
+        int mid = (start + end) / 2;
+
+        insert(mid);
+
+        buildBalanced(start, mid - 1);
+        buildBalanced(mid + 1, end);
+    }
 
