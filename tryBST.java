@@ -130,3 +130,22 @@ public boolean isBST(tNode node, int min, int max) {
             end = System.nanoTime();
             deleteTimes[i] = (end - start) / 1_000_000.0;
         }
+        double avgPopulate = average(populateTimes);
+        double avgDelete = average(deleteTimes);
+
+        double stdPopulate = stdDev(populateTimes, avgPopulate);
+        double stdDelete = stdDev(deleteTimes, avgDelete);
+
+        System.out.println("Number of keys (n): " + n);
+        System.out.println();
+
+        System.out.println("Method                  Avg Time (ms)    Std Dev");
+        System.out.println("------------------------------------------------");
+
+        System.out.printf("Populate tree           %.2f           %.2f\n",
+                avgPopulate, stdPopulate);
+
+        System.out.printf("Remove evens            %.2f           %.2f\n",
+                avgDelete, stdDelete);
+    }
+}
