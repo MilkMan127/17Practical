@@ -52,3 +52,28 @@ public boolean isBST(tNode node, int min, int max) {
     public boolean isBST() {
         return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
+ public int minValue(tNode node) {
+        while (node.left != null)
+            node = node.left;
+        return node.key;
+    }
+
+    
+    public tNode delete(tNode root, int key) {
+        if (root == null) return null;
+
+        if (key < root.key)
+            root.left = delete(root.left, key);
+        else if (key > root.key)
+            root.right = delete(root.right, key);
+        else {
+            // node found
+            if (root.left == null) return root.right;
+            else if (root.right == null) return root.left;
+
+            root.key = minValue(root.right);
+            root.right = delete(root.right, root.key);
+        }
+
+        return root;
+    }
