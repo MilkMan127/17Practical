@@ -39,4 +39,16 @@ public class tryBST {
         buildBalanced(start, mid - 1);
         buildBalanced(mid + 1, end);
     }
+public boolean isBST(tNode node, int min, int max) {
+        if (node == null) return true;
 
+        if (node.key <= min || node.key >= max)
+            return false;
+
+        return isBST(node.left, min, node.key) &&
+               isBST(node.right, node.key, max);
+    }
+
+    public boolean isBST() {
+        return isBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
